@@ -15,8 +15,8 @@
 % Set paths and prepare parameters
 
 % params.paths = 'S:\EEG Data Mini\';
-params.paths = 'S:\EEG Data\New\';
-params.ModelPath = 'trainedModelsCompact.mat';
+params.paths.dataDir = 'S:\EEG Data\New\';
+params.paths.ModelPath = 'trainedModelsCompact.mat';
 
 rng(1000) % Probably does nothing here
 startTime = tic;

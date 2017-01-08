@@ -3,8 +3,7 @@ function copyTestLeakToTrain(paths)
 % Move old, leaked test data to new training set
 
 % Load list of safe files
-safe = readtable([paths.mainDataDir, ...
-    'train_and_test_data_labels_safe.csv']);
+safe = readtable('train_and_test_data_labels_safe.csv');
 
 % Convert to string
 safe1 = string(safe{:,1});

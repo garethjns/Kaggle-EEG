@@ -2,6 +2,7 @@ function [SVMg, RBTg] = trainModels(features, params)
 
 
 %% General SVM
+
 disp('Training all subjects SVM')
 
 % Create CV object
@@ -20,6 +21,7 @@ SVMg = SVMg.assessMod(features.dataSet);
 if params.modParams.plotOn
     SVMg.plotAUCs('General model');
 end
+
 
 %% Increment seeds
 

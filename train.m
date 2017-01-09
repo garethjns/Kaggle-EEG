@@ -2,8 +2,8 @@
 % Train SVM and RBT general models from original Kaggle data
 % 'Name' and 'use' bugs not fixed yet
 
-clear
 startTime = tic;
+
 
 %% Set path to test data
 % Set paths and prepare parameters
@@ -37,7 +37,7 @@ copyTestLeakToTrain(params.paths)
 
 %% Process training set
 
-params.tt = 'train';
+params.tt = 'Train';
 
 % Features to use
 % Need to save this in serizureModel during training
@@ -109,4 +109,4 @@ save(params.paths.ModelPath, 'SVMgCompact', 'RBTgCompact')
 
 % Report time taken
 endTime = toc(startTime);
-disp(['Training time taken: ', num2str(startTime-endTime), ' s'])
+disp(['Training time taken: ', num2str(endTime), ' s'])

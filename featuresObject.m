@@ -286,7 +286,7 @@ classdef featuresObject
                 safe = readtable('train_and_test_data_labels_safe.csv');
                 
                 % Drop refernces to test data
-                flStr = string(obj.fileLists{1}.File);
+                flStr = string(obj.fileLists.File);
                 safeStr = string(safe.image);
                 trIdx = safeStr.contains(flStr);
                 safe = safe(trIdx, :);
@@ -298,7 +298,7 @@ classdef featuresObject
                 % Readd the new files in the training set (with modified
                 % names)
                 % Files in fileList
-                str = string(obj.fileLists{1}.File);
+                str = string(obj.fileLists.File);
                 % But not in safeStr
                 missingIdx = ~str.contains(safeStr);
                 % Add thses to safe, along with safe tag
@@ -312,28 +312,28 @@ classdef featuresObject
                 
                 % Join
                 % To fileList
-                nt = join(obj.fileLists{1}, safe);
+                nt = join(obj.fileLists, safe);
                 
                 % Order as fileList?
-                plot(nt.SubSegID); hold on; plot(obj.fileLists{1}.SubSegID)
-                if ~all(nt.SubSegID == obj.fileLists{1}.SubSegID)
+                % plot(nt.SubSegID); hold on; plot(obj.fileLists.SubSegID)
+                if ~all(nt.SubSegID == obj.fileLists.SubSegID)
                     keyboard
                 else
-                    obj.fileLists{1} = nt;
+                    obj.fileLists = nt;
                 end
                 
                 % Join
                 % To biggest subSegList
                 % (.File is called .Files here)
                 safe.Properties.VariableNames{1} = 'Files';
-                nSSL = join(obj.SSL{1}, safe);
+                nSSL = join(obj.SSL, safe);
                 
                 % Order as fileList?
-                plot(nSSL.SubSegID); hold on; plot(obj.SSL{1}.SubSegID)
-                if ~all(nSSL.SubSegID == obj.SSL{1}.SubSegID)
+                % plot(nSSL.SubSegID); hold on; plot(obj.SSL.SubSegID)
+                if ~all(nSSL.SubSegID == obj.SSL.SubSegID)
                     keyboard
                 else
-                    obj.SSL{1} = nSSL;
+                    obj.SSL = nSSL;
                 end
                 
                 % Set newKeepIdx
@@ -341,11 +341,11 @@ classdef featuresObject
                 
             else
                 % Don't apply new safeIdx
-                keepIdx2 = true(height(obj.SSL{1},1));
+                keepIdx2 = true(height(obj.SSL,1));
             end
             
             % Get oklist from training data and combine
-            keepIdx1 = obj.newKeepIdx(obj.allTrain);
+            keepIdx1 = obj.newKeepIdx(obj.dataSet);
             
             obj.keepIdx = keepIdx1 & keepIdx2;
         end
@@ -470,7 +470,7 @@ classdef featuresObject
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                sDir = [paths, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);
@@ -483,7 +483,7 @@ classdef featuresObject
                         '/', num2str(nFilesSub), ')']);
                     
                     switch str
-                        case {'train', 'T'}
+                        case {'train', 'Train'}
                             Y = str2double(fn(end-4));
                             IDIdx = strfind(files(n).name, '_');
                             ID = files(n).name(IDIdx(1)+1:IDIdx(2)-1);
@@ -595,7 +595,7 @@ classdef featuresObject
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                sDir = [paths, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);

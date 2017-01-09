@@ -1,6 +1,9 @@
 % Run training and testing from scratch using settings from train.m and
 % predict.m
 
+clear
+
+
 %% Delete existing features
 
 del = dir('*.mat');
@@ -21,4 +24,7 @@ predict
 et = toc(st);
 
 
+%% Report
+
 disp(['Test run time taken: ' num2str(et), ' s'])
+

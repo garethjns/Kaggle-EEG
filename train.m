@@ -73,7 +73,7 @@ featuresTrain = featuresTrain.compileFeatures();
 % Set model and cv parameters
 % CV
 params.cvParams.cvMode = 'Custom';
-params.cvParams.k = 2;
+params.cvParams.k = 12;
 params.cvParams.evalProp = 0.2;
 params.cvParams.overSample = 0.05;
 params.cvParmas.seed = 2222;

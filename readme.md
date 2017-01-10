@@ -4,7 +4,13 @@ Gareth Paul Jones
 2016
 
 ## Description
-This code is designed to process and predict seizure occurrence from a new test set, trained models saved in .mat are required.
+This code is designed to process the raw data from [Melbourne University AES/MathWorks/NIH Seizure Prediction](https://www.kaggle.com/c/melbourne-university-seizure-prediction), train a seizureModel (**train.m**), then predict seizure occurrence from a new test set (**predict.m**).
+
+**train.m** script:
+ - Processes raw data
+	- Creates new test set from original test and training sets
+ - Extracts features and saves in featuresObject (*featuresTrain)
+ - Trains an SVM and RUS boosted tree ensemble, saves the compact version of these.
 
 **predict.m** script:
  - Loads trained models (SVM and tree ensemble saved as seizureModel objects)
@@ -16,37 +22,40 @@ This code is designed to process and predict seizure occurrence from a new test 
  - Saves in to .csv submission file as per Kaggle specification
 
 ## Requirements
-MATLAB 2016b:
+ - Original Kaggle data or trained models
+- MATLAB 2016b:
   - Statistics and Machine Learning Toolbox
 
 
 ## Notes
- - Training code isn't included yet as it needs updating (see to do)
- - **predict.m** is designed to predict from general models only (ie. not single-subject models as well, will need to create another script to handle these)
+ - Training code works, but only scores ~0.65 at the moment. This is likely because the model parameters are just set to defaults for now.
  - Uses new version of featuresObject that holds only one dataset, rather than both train and test sets
- - cvPart object is included but isn't used for predicting
- - All parallel processing removed as requested
- - All figures suppressed as request (check!)
+ - All parallel processing has been removed for hold out testing
+ - All figures should be suppressed in prediction stage
 
 # Usage
+Training and prediction stages can be run independently from their respective scripts, or together from **testRun.m**. If running from **testRun.m** paths need to be set in **predict.m** and **train.m** first. Warning: **testRun.m** is designed to run entirely from scratch and *deletes all .mat files from the working directory when it starts!*
 
-- Set paths in **predict.m**
+Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and train.m is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
+
+- Set paths in **predict.m** and **train.m**
   - Set path for new test directory. Assumes 3 subjects and same structure as in Kaggle competition
   - Set path for loading trained models
-- Run
+- Run **train.m** then **predict.m**
 
 Processed features and final submission file are saved in to working directory.
 
 # Bugs
 ### Model feature names
-The trained model used for the Kaggle entry were trained with a version of the features object that combined feature names from different epoch lengths incorrectly. This bug is left in the new version of featuresObejct included here to maintain compatibility with the trained models. When the training code is added, featuresObject should be updated to correct this bug.
+The trained model used for the Kaggle entry were trained with a version of the features object that combined feature names from different epoch lengths incorrectly. This bug is left in the new version of featuresObejct included here to maintain compatibility with the trained models. When the training code is verified as working, featuresObject should be updated to correct this bug.
 
-## *use* structure
+### *use* structure
 The *use* structure, used to hold parameters specifying which feature groups to use in training, isn't saved in the seizureModel objects. It's needed to know which features to use when making new predictions, so is re-set manually in predict.m. When new training code is added, update seizureModel object to save *use* structure so it's obvious which feature groups the seizureModel used.
+
+### Score for new models
+**train.m** is currently producing models scoring ~0.65. Predicting from previously trained models still scores ~0.8. Need to correctly reset model params in **train.m** and check for bugs.
 
 
 # To do
- - Add code for training
-   - Requires updating training code to work with new featureObject
  - Save *use* structure in each seizureModel
  - Add feature descriptions

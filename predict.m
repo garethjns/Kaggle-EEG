@@ -26,6 +26,7 @@ params.nSubs = 3;
 % Other params
 % Edit in function
 params = setParams(params);
+params.plotOn = 0;
 
 warning('off', 'MATLAB:table:RowsAddedExistingVars')
 

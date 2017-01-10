@@ -29,6 +29,10 @@ classdef featuresObject
     methods
         function obj = featuresObject(params, use)
             
+            if isfield(params, 'tt')
+               obj.tt = params.tt; 
+            end
+            
             if isfield(params, 'divS')
                 obj.params = params;
                 % Get list of divS to use
@@ -54,6 +58,7 @@ classdef featuresObject
             % Save file lists and use
             obj = setFileLists(obj, {});
             obj.use = use;
+            
             
             % Run compile now?
             % obj = compileFeatures(obj);
@@ -182,9 +187,15 @@ classdef featuresObject
             
             % Set feature type
             obj = setType(obj);
-            
-            % Set keepIdx
-            obj = setkeepIdx(obj);
+
+            % Set safeIdx (if training)
+            switch obj.tt
+                case {'train', 'Train'}
+                    obj = setSafeIdx(obj);
+                case {'test', 'Test'}
+                    % Set keepIdx
+                    obj = setkeepIdx(obj);
+            end
             
             % Add subject numbers to sets if hybrid
             if obj.hybrid
@@ -264,6 +275,79 @@ classdef featuresObject
             keepIdx1 = obj.newKeepIdx(obj.dataSet);
             
             obj.keepIdx = keepIdx1;
+        end
+        
+        % Load and apply safe idx from second release of data
+        function obj = setSafeIdx(obj)
+            if obj.applyNewSafeIdx
+                
+                % Load csv
+                % Contains all training data and affected test data
+                safe = readtable('train_and_test_data_labels_safe.csv');
+                
+                % Drop refernces to test data
+                flStr = string(obj.fileLists.File);
+                safeStr = string(safe.image);
+                trIdx = safeStr.contains(flStr);
+                safe = safe(trIdx, :);
+                % Remove class column for safety
+                safe.class = [];
+                % Rename key variable
+                safe.Properties.VariableNames{1} = 'File';
+                
+                % Readd the new files in the training set (with modified
+                % names)
+                % Files in fileList
+                str = string(obj.fileLists.File);
+                % But not in safeStr
+                missingIdx = ~str.contains(safeStr);
+                % Add thses to safe, along with safe tag
+                nAdd = sum(missingIdx);
+                add = table(cellstr(str(missingIdx)), ones(nAdd,1));
+                add.Properties.VariableNames{1} = 'File';
+                add.Properties.VariableNames{2} = 'safe';
+                
+                % NB: Union drops dupes, but there shouldn't be any
+                safe = union(safe, add);
+                
+                % Join
+                % To fileList
+                nt = join(obj.fileLists, safe);
+                
+                % Order as fileList?
+                % plot(nt.SubSegID); hold on; plot(obj.fileLists.SubSegID)
+                if ~all(nt.SubSegID == obj.fileLists.SubSegID)
+                    keyboard
+                else
+                    obj.fileLists = nt;
+                end
+                
+                % Join
+                % To biggest subSegList
+                % (.File is called .Files here)
+                safe.Properties.VariableNames{1} = 'Files';
+                nSSL = join(obj.SSL, safe);
+                
+                % Order as fileList?
+                % plot(nSSL.SubSegID); hold on; plot(obj.SSL.SubSegID)
+                if ~all(nSSL.SubSegID == obj.SSL.SubSegID)
+                    keyboard
+                else
+                    obj.SSL = nSSL;
+                end
+                
+                % Set newKeepIdx
+                keepIdx2 = nSSL.safe;
+                
+            else
+                % Don't apply new safeIdx
+                keepIdx2 = true(height(obj.SSL,1));
+            end
+            
+            % Get oklist from training data and combine
+            keepIdx1 = obj.newKeepIdx(obj.dataSet);
+            
+            obj.keepIdx = keepIdx1 & keepIdx2;
         end
         
         
@@ -379,14 +463,14 @@ classdef featuresObject
             
             nSubs = numel(subs);
             % Generate file list
-            tn=0;
+            tn = 0;
             for s = 1:nSubs
                 % Create sub table for this subject
                 fileList = table(vars{:,1});
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                sDir = [paths.new, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);
@@ -399,7 +483,7 @@ classdef featuresObject
                         '/', num2str(nFilesSub), ')']);
                     
                     switch str
-                        case {'train', 'Test'}
+                        case {'train', 'Train'}
                             Y = str2double(fn(end-4));
                             IDIdx = strfind(files(n).name, '_');
                             ID = files(n).name(IDIdx(1)+1:IDIdx(2)-1);
@@ -504,14 +588,14 @@ classdef featuresObject
             
             nSubs = numel(subs);
             % Generate file list
-            tn=0;
+            tn = 0;
             for s = 1:nSubs
                 % Create sub table for this subject
                 fileList = table(vars{:,1});
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                sDir = [paths, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);

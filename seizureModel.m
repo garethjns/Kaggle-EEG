@@ -158,8 +158,11 @@ classdef seizureModel
                 dataList = obj.cv.listData(ki, obj.keepIdx);
                 labels = dataList.Class;
                 
+                % This disp doesn't disp as expected
                 disp(['Training ', obj.type, ' ', num2str(ki), ...
                     ' of ', num2str(obj.k)])
+                
+                % Save fold data
                 obj.trained{ki} = obj.modelFcn(obj, data, labels);
                 obj.trainedData{1,ki} = data;
                 obj.trainedData{2,ki} = labels;

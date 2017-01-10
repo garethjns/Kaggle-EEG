@@ -10,16 +10,15 @@
 % work with submitted models
 % use structure not being saved in seizureModels so is re-set here
 
+startTime = tic;
+
 
 %% Set path to test data
 % Set paths and prepare parameters
 
 % params.paths = 'S:\EEG Data Mini\';
-params.paths = 'S:\EEG Data\New\';
-params.ModelPath = 'trainedModelsCompact.mat';
-
-rng(1000) % Probably does nothing here
-startTime = tic;
+params.paths.dataDir = 'S:\EEG Data\New\';
+params.paths.ModelPath = 'trainedModelsCompact.mat';
 
 params.master = 61; % Version
 params.nSubs = 3;
@@ -34,7 +33,7 @@ warning('off', 'MATLAB:table:RowsAddedExistingVars')
 %% Load trained models
 % Load the trained models from params.ModelPath
 
-a = load(params.ModelPath);
+a = load(params.paths.ModelPath);
 % Models may be names *Compact, or not
 % Rename to RBTg and SVMg
 flds = string(fieldnames(a));
@@ -46,6 +45,8 @@ clear a flds
 %% Process test set
 % Sequentially Load the test set data from params.paths, extract features,
 % and join epochs of different lengths
+
+params.tt = 'Test';
 
 % Features to use
 % Need to save this in serizureModel during training
@@ -118,3 +119,6 @@ note = '';
 saveSub([note,'SVMgRBTg'], featuresTest.fileLists, ...
     nanmean([zscore2(preds.Segs.RBTg),zscore2(preds.Segs.SVMg)],2), ...
     params)
+
+endTime = toc(startTime);
+disp(['Testing time taken: ', num2str(endTime), ' s'])

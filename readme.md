@@ -9,7 +9,7 @@ This code is designed to process the raw data from [Melbourne University AES/Mat
 **train.m** script:
  - Processes raw data
 	- Creates new test set from original test and training sets
- - Extracts features and saves in featuresObject (*featuresTrain)
+ - Extracts features and saves in featuresObject (*featuresTrain*)
  - Trains an SVM and RUS boosted tree ensemble, saves the compact version of these.
 
 **predict.m** script:
@@ -23,7 +23,7 @@ This code is designed to process the raw data from [Melbourne University AES/Mat
 
 ## Requirements
  - Original Kaggle data or trained models
-- MATLAB 2016b:
+ - MATLAB 2016b:
   - Statistics and Machine Learning Toolbox
 
 

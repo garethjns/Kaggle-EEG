@@ -24,7 +24,7 @@ classdef cvPart
             
             % Set defualt params if not supplied
             % There was a bug here, param seed wasn't being set
-            % For now, using seed 111111 for all cvParts
+            % If using seed 111111 for all cvParts
             % Means different data on each fold, but with same number of
             % folds different models will get the same data
             if isfield(params, 'seed')

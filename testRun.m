@@ -4,16 +4,27 @@
 clear
 
 
-%% Delete existing features
+%% Delete existing features and models
+% If models or features already exist, create a folder and "delete" them in
+% to it
 
 del = dir('*.mat');
-nFiles = numel(del);
-for f = 1:nFiles
-    delete(del(f).name)
+
+if numel(del)>1
+    % Folder name
+    d = string(datetime).replace(':','_').replace('-','_').char();
+    mkdir(d)
+    
+    % Move files
+    nFiles = numel(del);
+    for f = 1:nFiles
+        movefile(del(f).name, [d, '\', del(f).name])
+    end
 end
 
 
 %% Run
+
 st = tic;
 
 % Run feature gen and training 

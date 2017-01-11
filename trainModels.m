@@ -10,6 +10,7 @@ cv = cvPart(features.fileLists, features.SSL, ...
     params.cvParams);
 
 % Create model object
+params.type = 'SVM';
 SVMg = seizureModel(params.modParams, cv);
 
 % Train model
@@ -38,6 +39,7 @@ cv = cvPart(features.fileLists, features.SSL, ...
     params.cvParams);
 
 % Create model object
+params.type = 'RBT';
 RBTg = seizureModel(params.modParams, cv);
 
 % Train model

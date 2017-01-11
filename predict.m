@@ -18,7 +18,7 @@ startTime = tic;
 
 % params.paths = 'S:\EEG Data Mini\';
 params.paths.dataDir = 'S:\EEG Data\New\';
-params.paths.ModelPath = 'trainedModelsCompact.mat';
+params.paths.ModelPath = 'trainedModelsCompactNew.mat';
 
 params.master = 61; % Version
 params.nSubs = 3;

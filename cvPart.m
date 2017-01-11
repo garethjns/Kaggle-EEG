@@ -28,9 +28,9 @@ classdef cvPart
             % Means different data on each fold, but with same number of
             % folds different models will get the same data
             if isfield(params, 'seed')
-                % Exchange these lines to make seed settable
-                % obj.seed = params.seed;
-                obj.seed = 111111;
+                % Exchange these lines to make seed  set or settable
+                obj.seed = params.seed;
+                % obj.seed = 111111;
             else % No seed specified
                 obj.seed = rng('shuffle');
             end

@@ -15,7 +15,7 @@ params.paths.dataDir = 'S:\EEG Data\New\';
 params.paths.or = 'S:\EEG Data\Original\';
 % Path to new training and test sets
 params.paths.new = params.paths.dataDir;
-params.paths.ModelPath = 'trainedModelsCompactNew.mat';
+params.paths.ModelPath = 'trainedModelsCompactTest.mat';
 
 params.master = 61; % Version
 params.nSubs = 3;
@@ -24,6 +24,7 @@ params.nSubs = 3;
 % Edit in function
 params = setParams(params);
 params.plotOn = 0;
+params.redoCopy = 0;
 
 warning('off', 'MATLAB:table:RowsAddedExistingVars')
 
@@ -33,8 +34,9 @@ warning('off', 'MATLAB:table:RowsAddedExistingVars')
 % safe files.
 % Creates singles.mat needed for this set
 
-copyTestLeakToTrain(params.paths)
-
+if params.redoCopy
+    copyTestLeakToTrain(params.paths)
+end
 
 %% Process training set
 
@@ -90,7 +92,7 @@ params.modParams.polyOrder = 2;
 params.modParams.BC = 1000;
 % RBT
 params.modParams.nLearners = 100;
-params.modParams.LearRate = 1;
+params.modParams.LearnRate = 1;
 params.modParams.MaxNumSplits = 20;
 
 % Run train function

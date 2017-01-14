@@ -28,7 +28,7 @@ This code is designed to process the raw data from [Melbourne University AES/Mat
 
 
 ## Notes
- - Training code works, but only scores ~0.65 at the moment. This is likely because the model parameters are just set to defaults for now.
+ - If seeds are now setting correctly, should score ~0.8059 (= 2nd place)
  - Uses new version of featuresObject that holds only one dataset, rather than both train and test sets
  - All parallel processing has been removed for hold out testing
  - All figures should be suppressed in prediction stage

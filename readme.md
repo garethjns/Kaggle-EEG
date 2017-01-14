@@ -55,6 +55,7 @@ The *use* structure, used to hold parameters specifying which feature groups to 
 ### Score for new models
 **train.m** is currently producing models scoring ~0.65. Predicting from previously trained models still scores ~0.8. Need to correctly reset model params in **train.m** and check for bugs.
 11/01 - Found bug, training two SVMs, should be fixed?
+14/01 - Now fixed, scores 0.80590 (second place)
 
 
 # To do

@@ -28,7 +28,7 @@ This code is designed to process the raw data from [Melbourne University AES/Mat
 
 
 ## Notes
- - Training code works, but only scores ~0.65 at the moment. This is likely because the model parameters are just set to defaults for now.
+ - If seeds are now setting correctly, should score ~0.8059 (= 2nd place)
  - Uses new version of featuresObject that holds only one dataset, rather than both train and test sets
  - All parallel processing has been removed for hold out testing
  - All figures should be suppressed in prediction stage
@@ -53,7 +53,9 @@ The trained model used for the Kaggle entry were trained with a version of the f
 The *use* structure, used to hold parameters specifying which feature groups to use in training, isn't saved in the seizureModel objects. It's needed to know which features to use when making new predictions, so is re-set manually in predict.m. When new training code is added, update seizureModel object to save *use* structure so it's obvious which feature groups the seizureModel used.
 
 ### Score for new models
-**train.m** is currently producing models scoring ~0.65. Predicting from previously trained models still scores ~0.8. Need to correctly reset model params in **train.m** and check for bugs.
+~~**train.m** is currently producing models scoring ~0.65. Predicting from previously trained models still scores ~0.8. Need to correctly reset model params in **train.m** and check for bugs.
+11/01 - Found bug, training two SVMs, should be fixed?~~  
+14/01 - Now fixed, scores 0.80590 (second place)  
 
 
 # To do

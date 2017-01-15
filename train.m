@@ -24,6 +24,7 @@ params.nSubs = 3;
 % Edit in function
 params = setParams(params);
 params.plotOn = 0;
+params.modParams.plotOn = false;
 params.redoCopy = 0;
 
 warning('off', 'MATLAB:table:RowsAddedExistingVars')
@@ -86,7 +87,6 @@ params.modParams.prior = 'Empirical';
 params.modParams.hyper = 0;
 params.modParams.standardize = true;
 params.modParams.seed = 1111;
-params.modParams.plotOn = true;
 % SVM
 params.modParams.polyOrder = 2;
 params.modParams.BC = 1000;

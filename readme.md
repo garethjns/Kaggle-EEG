@@ -1,6 +1,6 @@
 # EEG Seizure Prediction
 Gareth Paul Jones  
-3rd place [Melbourne University AES/MathWorks/NIH Seizure Prediction](https://www.kaggle.com/c/melbourne-university-seizure-prediction)  
+3rd place [Melbourne University AES/MathWorks/NIH Seizure Prediction](http://blog.kaggle.com/2017/01/10/seizure-prediction-competition-3rd-place-winners-interview-gareth-jones/)  
 2016
 
 ## Description

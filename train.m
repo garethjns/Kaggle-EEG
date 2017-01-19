@@ -63,7 +63,7 @@ use.mCorrsF = 1;
 disp('Creating basic features')
 
 % Epoch window sizes to use
-params.divS = [240, 160, 80];
+params.divS = [600, 400, 240, 160, 80];
 
 % Create object
 featuresTrain = featuresObject(params, use);

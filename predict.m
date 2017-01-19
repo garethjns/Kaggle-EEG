@@ -18,7 +18,7 @@ startTime = tic;
 
 % params.paths = 'S:\EEG Data Mini\';
 params.paths.dataDir = 'S:\EEG Data\New\';
-params.paths.ModelPath = 'trainedModelsCompactTest.mat';
+params.paths.ModelPath = 'trainedModelsCompact.mat';
 
 params.master = 61; % Version
 params.nSubs = 3;
@@ -69,6 +69,8 @@ use.mCorrsF = 1;
 disp('Creating basic features')
 
 % Epoch window sizes to use
+% Needs to match models used, but isn't saved in models at the moment so
+% reset here
 params.divS = [240, 160, 80];
 
 % Create object

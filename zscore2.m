@@ -1,3 +1,7 @@
+% MATLAB zscore function modified to handle means using nanmean and nanstd.
+% Note that this is slower than using mean and std.
+% Original version Copyright 1993-2015 The MathWorks, Inc. 
+
 function [z,mu,sigma] = zscore2(x,flag,dim)
 %ZSCORE Standardized z score.
 %   Z = ZSCORE(X) returns a centered, scaled version of X, the same size as X.

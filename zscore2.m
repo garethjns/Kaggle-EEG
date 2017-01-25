@@ -1,4 +1,4 @@
-% MATLAB zscore function modified to handle means using nanmean and nanstd.
+% MATLAB zscore function modified to handle nans using nanmean and nanstd.
 % Note that this is slower than using mean and std.
 % Original version Copyright 1993-2015 The MathWorks, Inc. 
 

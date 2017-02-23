@@ -8,11 +8,13 @@ startTime = tic;
 %% Set path to test data
 % Set paths and prepare parameters
 
+% Use these paths to create training set from original Kaggle data
+% Original data folder, as downloaded from Kaggle
+params.paths.or = 'S:\EEG Data\Original\';
+
 % Use training data from here
 params.paths.dataDir = 'S:\EEG Data\New\'; 
 
-% Use these paths to create training set from original Kaggle data
-params.paths.or = 'S:\EEG Data\Original\';
 % Path to new training and test sets
 params.paths.new = params.paths.dataDir;
 params.paths.ModelPath = 'trainedModelsCompactTest.mat';
@@ -25,7 +27,7 @@ params.nSubs = 3;
 params = setParams(params);
 params.plotOn = 0;
 params.modParams.plotOn = false;
-params.redoCopy = 0;
+params.redoCopy = 1;
 
 warning('off', 'MATLAB:table:RowsAddedExistingVars')
 

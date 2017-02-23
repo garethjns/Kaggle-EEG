@@ -470,10 +470,7 @@ classdef featuresObject
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                % Inflexible setting of data subpath
-                % sDir = [paths.dataDir, str, '_', subs{s}, '\'];
-                sDir = [paths.dataDir, str, '_', subs{s}, '_New\'];
-                % sDir = [paths.dataDir, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);
@@ -598,9 +595,7 @@ classdef featuresObject
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                % Inflexible setting of data subpath
-                % sDir = [paths.dataDir, str, '_', subs{s}, '\'];
-                sDir = [paths.dataDir, str, '_', subs{s}, '_New\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);

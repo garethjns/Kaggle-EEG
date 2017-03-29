@@ -10,10 +10,10 @@ startTime = tic;
 
 % Use these paths to create training set from original Kaggle data
 % Original data folder, as downloaded from Kaggle
-params.paths.or = 'S:\EEG Data\Original\';
+params.paths.or = 'R:\EEG Data\Original\';
 
 % Use training data from here
-params.paths.dataDir = 'S:\EEG Data\New\'; 
+params.paths.dataDir = 'R:\EEG Data\New\'; 
 
 % Path to new training and test sets
 params.paths.new = params.paths.dataDir;

@@ -489,5 +489,12 @@ classdef seizureModel
                         'nprint', 100);
             end
         end
+        
+        [bandsLin2D, bandsLinAv, ...
+    mB2D, mBAv, ...
+    names2D, namesAv, ...
+    namesmB2D, namesmBAv] = extractBandsLin(data, params)
+
+
     end
 end

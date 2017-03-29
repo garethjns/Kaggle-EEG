@@ -30,7 +30,7 @@ classdef featuresObject
         function obj = featuresObject(params, use)
             
             if isfield(params, 'tt')
-               obj.tt = params.tt; 
+                obj.tt = params.tt;
             end
             
             if isfield(params, 'divS')
@@ -187,7 +187,7 @@ classdef featuresObject
             
             % Set feature type
             obj = setType(obj);
-
+            
             % Set safeIdx (if training)
             switch obj.tt
                 case {'train', 'Train'}
@@ -350,7 +350,6 @@ classdef featuresObject
             obj.keepIdx = keepIdx1 & keepIdx2;
         end
         
-        
         function divS = findDivS(obj)
             % Find available features files
             files = dir(['*', obj.tt, 'divS*_*.mat']); %#ok<*PROP>
@@ -363,10 +362,10 @@ classdef featuresObject
             end
         end
         
-         function files = checkFiles(obj)
-            nD = numel(obj.divS); 
+        function files = checkFiles(obj)
+            nD = numel(obj.divS);
             files = cell(1, nD);
-
+            
             
             for d = 1:nD
                 % Check
@@ -438,8 +437,6 @@ classdef featuresObject
             % All zero windows will return NaNs for some features
             keepIdx = all(~isnan(data{:,:}),2);
         end
-        
-       
         
         function [fullFileList] = genFileListSomeSingles(subs, str, paths)
             warning('off', 'MATLAB:table:RowsAddedExistingVars')
@@ -613,7 +610,7 @@ classdef featuresObject
                             IDIdx = strfind(files(n).name, '_');
                             ID = files(n).name(IDIdx(1)+1:IDIdx(2)-1);
                             ID = str2double(ID);
-                            % ID duplicated between 0 and 1s 
+                            % ID duplicated between 0 and 1s
                             % Add 6000 to 1
                             % segement IDs (More than max of each subject,
                             % may still be duplicate IDs between subjects)
@@ -929,7 +926,7 @@ classdef featuresObject
                             feas.names.hillsBandsLogAv, ...
                             feas.names.maxHills2D, ...
                             feas.names.maxHillsAv] = ...
-                            extractHillBands(data(:,:,n), ...
+                            featuresObject.extractHillBands(data(:,:,n), ...
                             params);
                     end
                     
@@ -941,7 +938,7 @@ classdef featuresObject
                             feas.data.summ3Av(feaRow, :), ...
                             feas.names.summ32D, ...
                             feas.names.summ3Av] = ...
-                            extractSumm3(data(:,:,n), ...
+                            featuresObject.extractSumm3(data(:,:,n), ...
                             params);
                     end
                     
@@ -957,7 +954,7 @@ classdef featuresObject
                             feas.names.bandsLinAv, ...
                             feas.names.maxBands2D, ...
                             feas.names.maxBandsAv] = ...
-                            extractBandsLin(data(:,:,n), ...
+                            featuresObject.extractBandsLin(data(:,:,n), ...
                             params);
                     end
                     
@@ -967,7 +964,7 @@ classdef featuresObject
                         feaRow = feaRow+1;
                         [feas.data.mCorrsT(feaRow, :), ...
                             feas.names.mCorrsT] = ...
-                            extractChannelCorrelationT(data(:,:,n), ...
+                            featuresObject.extractChannelCorrelationT(data(:,:,n), ...
                             params);
                     end
                     
@@ -977,7 +974,7 @@ classdef featuresObject
                         feaRow = feaRow+1;
                         [feas.data.mCorrsF(feaRow, :), ...
                             feas.names.mCorrsF] = ...
-                            extractChannelCorrelationF(data(:,:,n), ...
+                            featuresObject.extractChannelCorrelationF(data(:,:,n), ...
                             params);
                     end
                     
@@ -988,7 +985,7 @@ classdef featuresObject
                     
                 end
                 
-               
+                
                 % Reapply subSegID
                 subSegList.SubSegID = ...
                     str2double(strrep(cellstr([num2str(subSegList.SegID), ...
@@ -997,5 +994,20 @@ classdef featuresObject
                 save(fn, vars{:}, '-v7.3')
             end
         end
+        
+        [mCorrsF2D, names2D] = ...
+            extractChannelCorrelationF(data, params)
+        
+        [mCorrsT2D, names2D] = ...
+            extractChannelCorrelationT(data, params)
+        
+        [HBLog2D, HBLogAv, ...
+            mB2D, mBAv, ...
+            names2D, namesAv, ...
+            namesmB2D, namesmBAv] = ...
+            extractHillBands(data, params)
+        
+        [summ32D, summ3Av, names32D, names3Av] = extractSumm3(data, params)
+        
     end
 end

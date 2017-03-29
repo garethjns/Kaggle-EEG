@@ -60,9 +60,9 @@ Processed features and final submission file are saved in to working directory.
 
 # Classes
 **featuresObject**
-  - Handles extraction of features and combination of features generated using different window lenghts.
+  - Handles extraction of features and combination of features generated using different window lenghts.  
 **seizureModel** 
-  - Handles training of SVM or RBT.
+  - Handles training of SVM or RBT.  
 **cvPart** 
   - Used instead of MATLAB's cvpartition object to handle cross-validation. Allows grouping of subject data from consecutive time periods in the training set, preventing data leak that otherwise leads to over optimistic scoring of the model's performance locally.
 

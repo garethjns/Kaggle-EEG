@@ -35,18 +35,20 @@ Training and prediction stages can be run independently from their respective sc
 
 Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and training is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
 
- - Extract the original Kaggle data to a folder containing , eg. R:\EEG Data\Original\  
-![Original folder structure](Images/folderStructure.png "")
+ - Extract the original Kaggle data to a folder containing, eg. R:\EEG Data\Original\  
+ - Extract the second test set released on Kaggle into a folder named New, R:\EEG Data\New\   
+![Folder structure](Images/folderStructure.png "")
 
 - Set paths the paths *params.paths.dataDir* and *params.paths.or* in **predict.m** and **train.m**
   - *params.paths.or* should be the path to the "Original" folder created above.
-  - *params.paths.dataDir* will be where the data for training will be copied to. eg. R:\EEG Data\New\ 
+  - *params.paths.dataDir* should be the "New" folder from above. Data from the original training and test sets will be copied here to create a new training set.
 
 - Run **train.m** 
-  - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and the folder structure should look something like this:  
-![Original folder structure](Images/folderStructure2.png "")
+  - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and the folder structure should look like this:  
+![Original folder structure](Images/folderStructure3.png "")
  
 - Run **predict.m**
+  - *params.paths.dataDir* should be the "New" directory, eg R:\EEG Data\New\
 
 Processed features and final submission file are saved in to working directory to save time on subsequent runs.
 

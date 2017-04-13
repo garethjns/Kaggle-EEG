@@ -43,7 +43,7 @@ Both **predict.m** and **train.m** expect the same directory structure as provid
   - *params.paths.dataDir* will be where the actual training and test will be copied to. eg. R:\EEG Data\New\ 
 
 - Run **train.m** 
-  - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and predicting and the folder structure should look something like this:  
+  - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and the folder structure should look something like this:  
 ![Original folder structure](Images/folderStructure2.png "")
  
 - Run **predict.m**

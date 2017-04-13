@@ -35,12 +35,12 @@ Training and prediction stages can be run independently from their respective sc
 
 Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and training is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
 
- - Extract the original Kaggle data to a folder, eg. R:\EEG Data\Original\  
+ - Extract the original Kaggle data to a folder containing , eg. R:\EEG Data\Original\  
 ![Original folder structure](Images/folderStructure.png "")
 
 - Set paths the paths *params.paths.dataDir* and *params.paths.or* in **predict.m** and **train.m**
   - *params.paths.or* should be the path to the "Original" folder created above.
-  - *params.paths.dataDir* will be where the actual training and test will be copied to. eg. R:\EEG Data\New\ 
+  - *params.paths.dataDir* will be where the data for training will be copied to. eg. R:\EEG Data\New\ 
 
 - Run **train.m** 
   - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and the folder structure should look something like this:  

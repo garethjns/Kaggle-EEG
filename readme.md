@@ -35,7 +35,7 @@ Training and prediction stages can be run independently from their respective sc
 
 Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and training is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
 
- - Extract the original Kaggle data to a folder containing, eg. R:\EEG Data\Original\  
+ - Extract the original Kaggle data to a folder, eg. R:\EEG Data\Original\  
  - Extract the second test set released on Kaggle into a folder named New, R:\EEG Data\New\   
 ![Folder structure](Images/folderStructure.png "")
 

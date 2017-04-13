@@ -592,7 +592,7 @@ classdef featuresObject
                 fileList.Properties.VariableNames = vars(:,2);
                 fileList.Properties.VariableDescriptions = vars(:,3);
                 
-                sDir = [paths.dataDir, str, '_', subs{s}, '\'];
+                sDir = [paths.dataDir, str, '_', subs{s}, '_New\'];
                 
                 % files = dir([sDir, subs{s}, '*']);
                 files = dir([sDir, '*.mat']);

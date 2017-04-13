@@ -30,17 +30,25 @@ These models are handled by the seizureModel object and are fit to all the data,
 
 ![alt text](Images/ModelStructure.png "Logo Title Text 1")  
 
-# Usage
+# Running
 Training and prediction stages can be run independently from their respective scripts, or together from **testRun.m**. If running from **testRun.m** paths need to be set in **predict.m** and **train.m** first. Warning: **testRun.m** is designed to run entirely from scratch and *deletes all .mat files from the working directory when it starts!*
 
-Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and train.m is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
+Both **predict.m** and **train.m** expect the same directory structure as provided for the competition, and training is specifically written to handle the temporal relationships in this dataset - it would need modification to work correctly with new data.
 
-- Set paths in **predict.m** and **train.m**
-  - Set path for new test directory. Assumes 3 subjects and same structure as in Kaggle competition
-  - Set path for loading trained models
-- Run **train.m** then **predict.m**
+ - Extract the original Kaggle data to a folder, eg. R:\EEG Data\Original\  
+![Original folder structure](Images/folderStructure.png "")
 
-Processed features and final submission file are saved in to working directory.
+- Set paths the paths *params.paths.dataDir* and *params.paths.or* in **predict.m** and **train.m**
+  - *params.paths.or* should be the path to the "Original" folder created above.
+  - *params.paths.dataDir* will be where the actual training and test will be copied to. eg. R:\EEG Data\New\ 
+
+- Run **train.m** 
+  - The first function **copyTestLeakToTrain.m** creates a new training/test set in *params.paths.dataDir*. This set will be used for training and predicting and the folder structure should look something like this:  
+![Original folder structure](Images/folderStructure2.png "")
+ 
+- Run **predict.m**
+
+Processed features and final submission file are saved in to working directory to save time on subsequent runs.
 
 # Scripts
 **train.m** script:

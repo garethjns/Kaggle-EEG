@@ -3,6 +3,10 @@ Gareth Paul Jones
 3rd place [Melbourne University AES/MathWorks/NIH Seizure Prediction](http://blog.kaggle.com/2017/01/10/seizure-prediction-competition-3rd-place-winners-interview-gareth-jones/)  
 2016
 
+See also:
+ - [Seizure Prediction Competition, 3rd Place Winner's Interview: Gareth Jones](http://blog.kaggle.com/2017/01/10/seizure-prediction-competition-3rd-place-winners-interview-gareth-jones/)
+ - [Using Machine Learning to Predict Epileptic Seizures from EEG Data](https://uk.mathworks.com/company/newsletters/articles/using-machine-learning-to-predict-epileptic-seizures-from-eeg-data.html?s_tid=srchtitle)
+
 ## Description
 This code is designed to process the raw data from [Melbourne University AES/MathWorks/NIH Seizure Prediction](https://www.kaggle.com/c/melbourne-university-seizure-prediction), train a seizureModel (**train.m**), then predict seizure occurrence from a new test set (**predict.m**).
 
